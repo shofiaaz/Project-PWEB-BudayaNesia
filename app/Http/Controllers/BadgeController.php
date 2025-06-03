@@ -8,12 +8,22 @@ use App\Models\Konten;
 use App\Models\BadgeLevel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BadgeController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
+
+        $user->loadMissing('badgeLevel');
+
+        $badgeLevel = $user->badgeLevel;
+
+
+        $quizCompleted = $badgeLevel ? $badgeLevel->quiz_completed : false;
+        $quizScore = $badgeLevel ? $badgeLevel->quiz_score : 0;
+
 
         $this->updateUserBadgeLevel($user->id);
 
@@ -23,39 +33,52 @@ class BadgeController extends Controller
             ->take(10)
             ->get();
 
+
         $topContents = Konten::where('akun_id', $user->id)
             ->where('status', 'approved')
             ->orderByDesc('views_count')
             ->take(10)
             ->get();
 
-        $userBadge = BadgeLevel::where('akun_id', $user->id)->first();
+        $userBadge = $badgeLevel;
+
         $badgeInfo = $this->getBadgeInfo($userBadge ? $userBadge->poin : 0);
 
-        return view('user.badge.index', compact('topUsers', 'topContents', 'userBadge', 'badgeInfo'));
+        return view('user.badge.index', compact('topUsers', 'topContents', 'userBadge', 'badgeInfo', 'quizCompleted', 'quizScore'));
+    }
+
+    public function quiz()
+    {
+        $user = Auth::user();
+
+
+        $quizCompleted = auth()->user()->quiz_completed ?? false;
+        $quizScore = auth()->user()->quiz_score ?? 0;
+
+        return view('user.badge.quiz', compact('quizCompleted', 'quizScore'));
     }
 
 
     private function updateUserBadgeLevel($userId)
     {
-        // Count approved content for the user
         $approvedContentCount = Konten::where('akun_id', $userId)
             ->where('status', 'approved')
             ->count();
 
-        // Calculate points
-        $totalPoin = $approvedContentCount * 100;
+        $badgeLevel = BadgeLevel::where('akun_id', $userId)->first();
 
+        if (!$badgeLevel) {
+            return;
+        }
+
+        $totalPoin = ($approvedContentCount * 100) + $badgeLevel->quiz_score;
         $badgeStatus = $this->determineBadgeStatus($totalPoin);
 
-        BadgeLevel::updateOrCreate(
-            ['akun_id' => $userId],
-            [
-                'poin' => $totalPoin,
-                'status' => $badgeStatus,
-                'konten_approved' => $approvedContentCount
-            ]
-        );
+        $badgeLevel->update([
+            'poin' => $totalPoin,
+            'status' => $badgeStatus,
+            'konten_approved' => $approvedContentCount
+        ]);
     }
 
     private function determineBadgeStatus($poin)
@@ -73,9 +96,6 @@ class BadgeController extends Controller
         }
     }
 
-    /**
-     * Get badge information including current level and next level requirements
-     */
     private function getBadgeInfo($currentPoin)
     {
         $badges = [
@@ -114,9 +134,6 @@ class BadgeController extends Controller
         ];
     }
 
-    /**
-     * Manually recalculate all users' badge levels (for admin use)
-     */
     public function recalculateAllBadges()
     {
         $users = Akun::all();
@@ -127,5 +144,67 @@ class BadgeController extends Controller
 
         Alert::success('Success', 'All user badge levels have been recalculated');
         return redirect()->back();
+    }
+
+    public function submitQuiz(Request $request)
+    {
+        $user = auth()->user();
+        $badgeLevel = BadgeLevel::firstOrCreate(
+            ['akun_id' => $user->id],
+            ['poin' => 0, 'status' => 'Abdi', 'konten_approved' => 0, 'quiz_completed' => false, 'quiz_score' => 0]
+        );
+
+        if ($badgeLevel->quiz_completed) {
+            return redirect()->route('badge.index')->with([
+                'quiz_submission_status' => 'error',
+                'quiz_submitted_message' => 'Anda sudah menyelesaikan kuis ini.'
+            ]);
+        }
+
+        $answers = [
+            'question1' => 'A',
+            'question2' => 'C',
+            'question3' => 'A',
+            'question4' => [
+                'a' => 'Aceh',
+                'b' => 'Jawa Barat'
+            ],
+            'question5' => 'A'
+        ];
+
+        $score = 0;
+
+        // Penilaian jawaban
+        if ($request->question1 === $answers['question1']) $score += 20;
+        if ($request->question2 === $answers['question2']) $score += 20;
+        if ($request->question3 === $answers['question3']) $score += 20;
+        if ($request->question4a === $answers['question4']['a']) $score += 10;
+        if ($request->question4b === $answers['question4']['b']) $score += 10;
+        if ($request->question5 === $answers['question5']) $score += 20;
+
+        DB::beginTransaction();
+        try {
+            $badgeLevel->update([
+                'quiz_completed' => true,
+                'quiz_score' => $score,
+                'poin' => $badgeLevel->poin + $score
+            ]);
+
+            $this->updateUserBadgeLevel($user->id);
+            DB::commit();
+
+            return redirect()->route('badge.index')->with([
+                'quiz_submission_status' => 'success',
+                'quiz_submitted_message' => 'Kuis berhasil disubmit! Anda mendapatkan '.$score.' poin.',
+                'quiz_submitted_score' => $score
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with([
+                'quiz_submission_status' => 'error',
+                'quiz_submitted_message' => 'Gagal menyimpan hasil kuis: '.$e->getMessage()
+            ]);
+        }
     }
 }

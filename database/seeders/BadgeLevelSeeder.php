@@ -10,27 +10,21 @@ use App\Models\BadgeLevel;
 
 class BadgeLevelSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
-        // Get all users
-        $users = Akun::all();
+        //get semua user kecuali atmin
+        $users = Akun::where('username', '!=', 'admin123')->get();
 
         foreach ($users as $user) {
-            // Count approved content for each user
             $approvedContentCount = Konten::where('akun_id', $user->id)
                 ->where('status', 'approved')
                 ->count();
 
-            // Calculate points (10 points per approved content)
-            $totalPoin = $approvedContentCount * 10;
+            $totalPoin = $approvedContentCount * 100;
 
-            // Determine badge status
             $badgeStatus = $this->determineBadgeStatus($totalPoin);
 
-            // Create or update badge level
             BadgeLevel::updateOrCreate(
                 ['akun_id' => $user->id],
                 [
@@ -44,9 +38,6 @@ class BadgeLevelSeeder extends Seeder
         $this->command->info('Badge levels have been seeded for all users!');
     }
 
-    /**
-     * Determine badge status based on points
-     */
     private function determineBadgeStatus($poin)
     {
         if ($poin >= 2000) {

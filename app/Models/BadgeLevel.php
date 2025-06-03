@@ -15,7 +15,9 @@ class BadgeLevel extends Model
         'akun_id',
         'poin',
         'status',
-        'konten_approved'
+        'konten_approved',
+        'quiz_completed',
+        'quiz_score',
     ];
 
     protected $casts = [
@@ -23,17 +25,12 @@ class BadgeLevel extends Model
         'konten_approved' => 'integer',
     ];
 
-    /**
-     * Relationship with Akun model
-     */
+
     public function akun()
     {
         return $this->belongsTo(Akun::class, 'akun_id');
     }
 
-    /**
-     * Get badge icon based on status
-     */
     public function getBadgeIconAttribute()
     {
         $icons = [
@@ -47,9 +44,6 @@ class BadgeLevel extends Model
         return $icons[$this->status] ?? 'fas fa-user';
     }
 
-    /**
-     * Get badge color based on status
-     */
     public function getBadgeColorAttribute()
     {
         $colors = [

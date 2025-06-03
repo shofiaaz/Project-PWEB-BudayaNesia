@@ -42,11 +42,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/konten/create', [KontenController::class, 'create'])->name('konten.create');
         Route::post('/store', [KontenController::class, 'store'])->name('konten.store');
         Route::delete('/konten/{id}', [KontenController::class, 'destroy'])->name('konten.destroy');
-
-
     });
 
     Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+    Route::get('badge/quiz', [BadgeController::class, 'quiz'])->name('badge.quiz');
+    Route::post('/submit-quiz', [BadgeController::class, 'submitQuiz'])->name('badge.submit-quiz');
 
 });
 

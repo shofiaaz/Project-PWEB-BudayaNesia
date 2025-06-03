@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gray-50">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-budanes-darker to-budanes-dark py-8 px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-budanes to-dark py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
                 <h1 class="font-lily text-4xl md:text-5xl text-white mb-2 animate-fade-in">Sistem Badge Level</h1>
@@ -14,6 +14,32 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {{-- POP-UP / MODAL --}}
+        <div id="quizCompletedModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center hidden z-50">
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Pemberitahuan!</h3>
+                <p class="text-gray-700 mb-6">Anda sudah mengerjakan kuis ini.</p>
+                <button id="closeModalBtn" class="px-5 py-2 bg-budanes text-white rounded-lg hover:bg-budanes-dark transition-colors">
+                    Oke
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Promotion Section -->
+        <div class="bg-gradient-to-r from-dark to-budanes-darker rounded-xl shadow-lg overflow-hidden mb-8 p-6 text-white">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="font-bold text-2xl flex items-center mb-2">
+                        <i class="fas fa-arrow-up mr-3"></i> Tingkatkan Badge
+                    </h2>
+                    <p class="opacity-90">Kerjakan kuis interaktif untuk menambah poin Anda!</p>
+                </div>
+                <a href="{{ route('badge.quiz') }}" id="start-quiz-btn"
+                    class="px-6 py-3 bg-white text-budanes-darker font-bold rounded-lg hover:bg-gray-100 transition-colors flex items-center no-underline"> <i class="fas fa-play mr-2"></i> Kerjakan Kuis
+                </a>
+            </div>
+        </div>
 
         <!-- User Current Badge Section -->
         <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
@@ -262,5 +288,100 @@
         }
     }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const quizCompletedModal = document.getElementById('quizCompletedModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
 
+        // Ambil status quizCompleted dari PHP ke JavaScript
+        const quizCompletedStatus = {{ $quizCompleted ? 'true' : 'false' }};
+
+        // Jika kuis sudah selesai
+        if (quizCompletedStatus) {
+            startQuizBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                quizCompletedModal.classList.remove('hidden');
+            });
+        } else {
+
+        }
+
+        closeModalBtn.addEventListener('click', function() {
+            quizCompletedModal.classList.add('hidden');
+        });
+
+        quizCompletedModal.addEventListener('click', function(event) {
+            if (event.target === quizCompletedModal) {
+                quizCompletedModal.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle quiz result popup
+        @if(session('quiz_submission_status'))
+            const status = "{{ session('quiz_submission_status') }}";
+            const message = "{{ session('quiz_submitted_message') }}";
+            const score = parseInt("{{ session('quiz_submitted_score', 0) }}");
+
+            if (status === 'success') {
+                // Determine result message based on score
+                let resultMessage = '';
+                let resultImage = '';
+
+                if (score >= 80) {
+                    resultMessage = 'Luar biasa! Anda sangat memahami budaya Indonesia.';
+                    resultImage = 'https://i.pinimg.com/originals/ab/4b/8e/ab4b8e151241dd9e30ac691a7bdd1287.gif';
+                } else if (score >= 60) {
+                    resultMessage = 'Bagus! Pengetahuan Anda tentang budaya Indonesia cukup baik.';
+                    resultImage = 'https://i.pinimg.com/originals/8c/8c/97/8c8c97dacf1e7936bb86faff609ebf3c.gif';
+                } else {
+                    resultMessage = 'Ish ish ish! Pelajari lagi budaya Indonesia dan coba lagi.';
+                    resultImage = 'https://i.pinimg.com/originals/c0/8a/95/c08a953a7b7e293c9fa5b68abb6d135f.gif';
+                }
+
+                // Show result popup after short delay
+                setTimeout(() => {
+                    Swal.fire({
+                        title: 'Hasil Kuis Anda',
+                        html: `
+                        <div style="text-align: center;">
+                            <p>${message}</p>
+
+                            <div style="font-size: 3rem; font-weight: bold; color: #A41313; margin: 20px 0;">
+                                Skor: ${score}/100
+                            </div>
+
+                            <p>${resultMessage}</p>
+
+                            ${resultImage ? `<img src="${resultImage}" style="display: block; margin: 15px auto 0 auto; max-width: 50%; height: auto; border-radius: 8px;">` : ''}
+                        </div>
+                        `,
+                        confirmButtonText: 'Mengerti',
+                        confirmButtonColor: '#A41313',
+                        width: 600,
+                        padding: '3em',
+                        backdrop: `
+                            rgba(20,0,0,0.4)
+                            url("https://i.pinimg.com/originals/cf/50/6d/cf506d6998d68de01e9171f30fc4e287.gif")
+                            center center / cover
+                            no-repeat
+                        `
+                    });
+                }, 500);
+            } else if (status === 'error') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: message,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'OK'
+                });
+            }
+        @endif
+    });
+    </script>
 @endsection

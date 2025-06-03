@@ -78,6 +78,7 @@
                             <option value="kerajinan">Kerajinan</option>
                             <option value="kuliner">Kuliner</option>
                             <option value="upacara">Upacara</option>
+                            <option value="situs budaya">Situs Budaya</option>
                         </select>
                     </div>
 

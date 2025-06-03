@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AkunSeeder::class,
             KontenSeeder::class,
-
+            BadgeLevelSeeder::class,
         ]);
     }
 }

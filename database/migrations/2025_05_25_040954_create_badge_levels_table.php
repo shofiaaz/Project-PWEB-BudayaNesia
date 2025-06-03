@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('poin')->default(0);
             $table->enum('status', ['Abdi', 'Panewu', 'Adipati', 'Mahapatih', 'Sultan']);
             $table->integer('konten_approved')->default(0);
+            $table->boolean('quiz_completed')->default(false);
+            $table->integer('quiz_score')->default(0);
             $table->timestamps();
 
             // Foreign key constraint

@@ -12,7 +12,7 @@
             </div>
 
             <div class="bg-gray-900 border-2 border-b-8 border-black lg:w-1/2 p-8 md:p-12 flex flex-col justify-center h-full"> <div class="text-center mb-8">
-                    <h1 class="text-4xl font-bold text-white mb-2 animate-fade-in">Welcome back to <span class="bg-gradient-to-r from-blue-300 to-budanes-dark bg-clip-text text-transparent" style="font-family: 'Lily Script One', cursive;">BudayaNesia</span></h1>
+                    <h1 class="text-4xl font-bold text-white mb-2 animate-fade-in">Welcome back to <span class="bg-red-700 bg-clip-text text-transparent" style="font-family: 'Lily Script One', cursive;">BudayaNesia</span></h1>
                     <p class="text-white text-lg animate-fade-in" style="animation-delay: 0.1s;">Silakan masuk ke akun Anda</p>
                 </div>
 
@@ -52,7 +52,7 @@
 
                     <div class="animate-fade-in" style="animation-delay: 0.4s;">
                         <button type="submit"
-                                class="border-b-4 border-budanes w-full bg-black hover:bg-dark hover:text-budanes text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center text-xl">
+                                class="border-b-4 border-red-900 w-full bg-budanes hover:bg-black hover:text-budanes text-white font-bold py-4 px-4 rounded-lg transition duration-300 flex items-center justify-center text-xl">
                             <i class="fas fa-sign-in-alt mr-2"></i> Masuk
                         </button>
                     </div>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class=" rounded-lg mt-6 text-center animate-fade-in p-3" style="animation-delay: 0.6s;">
-                    <a href="{{route('home')}}" class="border-b-4 border-budanes inline-flex items-center text-white hover:text-budanes transition text-lg bg-black rounded-lg p-3 border-b-2 border-black">
+                    <a href="{{route('home')}}" class="border-b-4 border-red-900 inline-flex items-center text-white hover:bg-black hover:text-budanes transition text-lg bg-budanes rounded-lg p-3 border-b-2 border-black">
                         <i class="fas fa-home mr-2"></i> Kembali ke Beranda
                     </a>
                 </div>

@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->string('judul');
             $table->text('isi');
-            $table->enum('kategori', ['tarian', 'musik', 'kuliner', 'upacara', 'kerajinan']);
+            $table->enum('kategori', ['tarian', 'musik', 'kuliner', 'upacara', 'kerajinan', 'situs budaya']);
             $table->enum('status', ['rejected', 'pending', 'approved']);
             $table->string('asal');
             $table->unsignedBigInteger('akun_id');
