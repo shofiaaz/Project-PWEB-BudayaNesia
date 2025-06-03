@@ -1,0 +1,68 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\KontenController;
+use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+
+Route::get('/', function () {
+    return view('user.index');
+});
+
+// guest
+Route::get('/user', [AuthController::class, 'home']);
+Route::get('/user/regis', function () {
+    return view('user.regis');
+})->name('regis');
+
+Route::get('/user/konten', [KontenController::class, 'index'])->name('konten.index');
+Route::get('/konten/{id}', [KontenController::class, 'show'])->name('konten.show');
+
+// route Login n regis submit
+Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/login', [AuthController::class, 'ShowLogin'])->name('login');
+// logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/home', [AuthController::class, 'home'])->name('home');
+
+//routes user
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
+    Route::prefix('konten')->group(function () {
+
+        Route::get('/konten/histori', [KontenController::class, 'histori'])->name('konten.histori');
+        Route::get('/konten/create', [KontenController::class, 'create'])->name('konten.create');
+        Route::post('/store', [KontenController::class, 'store'])->name('konten.store');
+        Route::delete('/konten/{id}', [KontenController::class, 'destroy'])->name('konten.destroy');
+
+
+    });
+
+    Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+
+});
+
+//admin
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/konten/create', [AdminController::class, 'create'])->name('konten.create');
+    Route::get('/konten/read', [AdminController::class, 'index'])->name('konten.index');
+    Route::get('/konten/{id}/edit', [AdminController::class, 'edit'])->name('konten.edit');
+    Route::put('/konten/{id}', [AdminController::class, 'update'])->name('konten.update');
+    Route::delete('/konten/{id}', [AdminController::class, 'destroy'])->name('konten.destroy');
+
+
+    Route::post('/content/{id}/approve', [AdminController::class, 'approveContent'])->name('content.approve');
+    Route::post('/content/{id}/reject', [AdminController::class, 'rejectContent'])->name('content.reject');
+    Route::post('/recalculate-badges', [BadgeController::class, 'recalculateAllBadges'])->name('recalculate.badges');
+});
+
