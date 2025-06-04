@@ -7,6 +7,7 @@ use App\Http\Controllers\KontenController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
@@ -21,6 +22,11 @@ Route::get('/user/regis', function () {
 
 Route::get('/user/konten', [KontenController::class, 'index'])->name('konten.index');
 Route::get('/konten/{id}', [KontenController::class, 'show'])->name('konten.show');
+
+
+Route::get('/user/event', [EventController::class, 'index'])->name('event.index');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
+
 
 // route Login n regis submit
 Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
@@ -42,6 +48,14 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/konten/create', [KontenController::class, 'create'])->name('konten.create');
         Route::post('/store', [KontenController::class, 'store'])->name('konten.store');
         Route::delete('/konten/{id}', [KontenController::class, 'destroy'])->name('konten.destroy');
+    });
+
+    Route::prefix('event')->group(function () {
+
+        Route::get('/event/histori', [EventController::class, 'histori'])->name('event.histori');
+        Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
+        Route::post('/store', [EventController::class, 'store'])->name('event.store');
+        Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
     });
 
     Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');

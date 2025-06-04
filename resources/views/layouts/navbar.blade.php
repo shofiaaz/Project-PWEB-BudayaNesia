@@ -19,7 +19,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{route('home')}}" class="menu-item font-bold transition duration-200 hover:text-budanes">HOME</a>
                     <a href="{{route('konten.index')}}" class="menu-item font-bold transition duration-200 hover:text-budanes">KONTEN BUDAYA</a>
-                    <a href="/event" class="menu-item font-bold transition duration-200 hover:text-budanes">EVENT BUDAYA</a>
+                    <a href="{{route('event.index')}}"  class="menu-item font-bold transition duration-200 hover:text-budanes">EVENT BUDAYA</a>
 
                     <div class="flex items-center space-x-4">
                         @auth
@@ -39,7 +39,7 @@
                                      x-transition:leave-end="opacity-0 scale-95"
                                      class="absolute bg-white shadow-lg rounded-md mt-2 py-1 w-48 z-50 border-b-4 border-budanes">
                                     <a href="{{route('konten.histori')}}" class="block px-4 py-2 hover:text-white hover:bg-budanes transition duration-200">KONTRIBUSI KONTEN</a>
-                                    <a href="" class="block px-4 py-2 hover:bg-budanes hover:text-white transition duration-200">KONTRIBUSI EVENT</a>
+                                    <a href="{{route('event.histori')}}" class="block px-4 py-2 hover:bg-budanes hover:text-white transition duration-200">KONTRIBUSI EVENT</a>
                                     <a href="{{route('badge.index')}}" class="block px-4 py-2 hover:bg-budanes hover:text-white transition duration-200">BADGE LEVEL</a>
                                 </div>
                             </div>

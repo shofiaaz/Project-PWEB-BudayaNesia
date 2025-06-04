@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Konten;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class KontenController extends Controller
 {
