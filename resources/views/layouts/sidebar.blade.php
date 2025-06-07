@@ -23,7 +23,7 @@
             </li>
 
             <li>
-                <a href="" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
+                <a href="{{ route('admin.events.index') }}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
                     <i class="fas fa-exchange-alt w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
                     <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Event</span>
                     <span class="flex-1 flex justify-end items-center">
@@ -44,7 +44,7 @@
             </li>
 
             <li>
-                <a href="" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
+                <a href="{{route('admin.profile')}}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
                     <i class="fas fa-user w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
                     <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Akun</span>
                     <span class="flex-1 flex justify-end">

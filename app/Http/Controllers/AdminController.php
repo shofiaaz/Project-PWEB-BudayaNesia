@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Konten;
+use App\Models\Akun;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
@@ -88,4 +91,37 @@ class AdminController extends Controller
     {
         return view('admin.konten.index');
     }
+    public function profile()
+    {
+        $admin = Auth::user();
+        return view('admin.profile.index', compact('admin'));
+    }
+
+    public function editProfile()
+    {
+        $admin = Auth::user();
+        return view('admin.profile.edit', compact('admin'));
+    }
+    public function updateProfile(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:akun,email,' . Auth::id(),
+        'nomor_hp' => 'required|string|max:15|unique:akun,nomor_hp,' . Auth::id(),
+        'password' => 'nullable|string|min:8|confirmed',
+    ]);
+
+    $admin = Akun::findOrFail(Auth::id());
+    $admin->username = $request->name;
+    $admin->email = $request->email;
+    $admin->nomor_hp = $request->nomor_hp;
+
+    if ($request->password) {
+        $admin->password = bcrypt($request->password);
+    }
+
+    $admin->save();
+
+    return redirect()->route('admin.profile')->with('success', 'Profile berhasil diperbarui.');
+}
 }

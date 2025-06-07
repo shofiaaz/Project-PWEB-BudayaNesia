@@ -74,6 +74,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::put('/konten/{id}', [AdminController::class, 'update'])->name('konten.update');
     Route::delete('/konten/{id}', [AdminController::class, 'destroy'])->name('konten.destroy');
 
+    // profile admin
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile'); // Admin Profile
+    Route::get('/profile/edit', [AdminController::class, 'editProfile'])->name('profile.edit'); // Edit Profile
+    Route::put('/profile', [AdminController::class, 'updateProfile'])->name('profile.update'); // Update Profile
+
+    // Event Routes
+    Route::get('/events', [EventController::class, 'indexAdmin'])->name('events.index'); // Menampilkan daftar event
+    Route::get('/events/create', [EventController::class, 'createAdmin'])->name('events.create'); // Form tambah event
+    Route::post('/events/store', [EventController::class, 'storeAdmin'])->name('events.store');
+    Route::get('/events/{event}', [EventController::class, 'showAdmin'])->name('events.show');
+    Route::put('/events/{event}', [EventController::class, 'updateAdmin'])->name('events.update');
+    Route::delete('/events/{event}', [EventController::class, 'destroyAdmin'])->name('events.destroy');
 
     Route::post('/content/{id}/approve', [AdminController::class, 'approveContent'])->name('content.approve');
     Route::post('/content/{id}/reject', [AdminController::class, 'rejectContent'])->name('content.reject');

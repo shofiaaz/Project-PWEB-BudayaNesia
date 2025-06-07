@@ -8,7 +8,7 @@
         <nav class="bg-white shadow-md transition-all duration-300" :class="{'shadow-lg': scrollPosition > 10}">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <a href="/" class="inline-flex items-center transform hover:scale-105 transition-all duration-300">
-                    <img src="{{ asset('assets/img/Budanes__1_-removebg-preview.png') }}" class="w-8 h-8 mr-2"> <span class="text-3xl font-extrabold tracking-tighter bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text font-monserrat">
+                    <img src="{{ asset('assets/img/Budanes__1_-removebg-preview.png') }}" class="w-8 h-8 mr-2"> <span class="text-3xl font-extrabold tracking-tighter text-gray-900 font-monserrat">
                         Budaya
                     </span>
                     <span class="text-3xl font-extrabold tracking-tighter bg-budanes text-transparent bg-clip-text font-monserrat">

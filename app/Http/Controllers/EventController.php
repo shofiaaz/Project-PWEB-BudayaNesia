@@ -71,7 +71,7 @@ class EventController extends Controller
         ]);
 
         Alert::success('Sukses', 'Konten budaya berhasil diajukan!');
-        return redirect()->route('konten.histori');
+        return redirect()->route('event.histori');
     }
 
         public function show($id)
@@ -112,6 +112,87 @@ class EventController extends Controller
         $event->delete();
 
         return redirect()->back()->with('success', 'Event berhasil dihapus.');
+    }
+
+    public function indexAdmin()
+    {
+        $events = Event::all();
+        return view('admin.event.index', compact('events'));
+    }
+
+    public function createAdmin()
+    {
+        return view('admin.event.create');
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'akun_id' => 'required|exists:akun,id',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'judul' => 'required|string|max:255',
+            'jadwal' => 'required|date',
+            'tempat' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'kategori' => 'required|in:tarian,musik,kuliner,upacara,kerajinan',
+            'status' => 'required|in:rejected,pending,approved',
+            'views_count' => 'nullable|integer|min:0',
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/events', $filename);
+            $data['thumbnail'] = 'events/' . $filename;
+        }
+
+        Event::create($data);
+        return redirect()->route('admin.events.index')->with('success', 'Event berhasil dibuat.');
+    }
+
+    public function editAdmin(Event $event)
+    {
+        return response()->json($event);
+    }
+
+    public function updateAdmin(Request $request, Event $event)
+    {
+        $request->validate([
+            'akun_id' => 'required|exists:akun,id',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'judul' => 'required|string|max:255',
+            'jadwal' => 'required|date',
+            'tempat' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'kategori' => 'required|in:tarian,musik,kuliner,upacara,kerajinan',
+            'status' => 'required|in:rejected,pending,approved',
+            'views_count' => 'nullable|integer|min:0',
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('thumbnail')) {
+            // Delete old thumbnail
+            if ($event->thumbnail) {
+                Storage::delete('public/' . $event->thumbnail);
+            }
+
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/events', $filename);
+            $data['thumbnail'] = 'events/' . $filename;
+        }
+
+        $event->update($data);
+        return redirect()->route('admin.events.index')->with('success', 'Event berhasil diperbarui.');
+    }
+
+    public function destroyAdmin(Event $event)
+    {
+        $event->delete();
+        return redirect()->route('events.index')->with('success', 'Event berhasil dihapus.');
     }
 
 }
