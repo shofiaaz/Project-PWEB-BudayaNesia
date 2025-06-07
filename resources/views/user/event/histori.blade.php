@@ -66,16 +66,23 @@
                                         <i class="far fa-clock mr-1"></i> {{ $event->created_at->diffForHumans() }}
                                     </span>
                                 </div>
-                                @if($event->status === 'pending')
-                                    <form action="{{ route('event.destroy', $event->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="ml-2 text-red-500 hover:text-red-700 text-sm">
-                                            <i class="fas fa-trash-alt mr-1"></i> Hapus
-                                        </button>
-                                    </form>
-                                @endif
+                                <!-- Tambahkan di bawah sini -->
 
+                                @if($event->status === 'pending')
+                                    <div class="mt-2 flex items-center space-x-4">
+                                        <form action="{{ route('event.destroy', $event->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-700 text-sm">
+                                                <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                            </button>
+                                        </form>
+
+                                        <a href="{{ route('event.edit', $event->id) }}" class="text-blue-500 hover:text-blue-700 text-sm">
+                                            <i class="fas fa-edit mr-1"></i> Edit
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </li>

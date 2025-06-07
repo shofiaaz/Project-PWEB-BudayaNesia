@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
         Route::post('/store', [EventController::class, 'store'])->name('event.store');
         Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
+        Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
+        Route::put('/{id}', [EventController::class, 'update'])->name('event.update');
+
     });
 
     Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');

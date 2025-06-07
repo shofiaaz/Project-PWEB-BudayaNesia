@@ -84,7 +84,39 @@ class EventController extends Controller
 
         return view('user.event.show', compact('event'));
     }
+    public function edit($id)
+{
+    $event = Event::findOrFail($id);
 
+    return view('user.event.edit', compact('event'));
+}
+public function update(Request $request, $id)
+{
+    $event = Event::findOrFail($id);
+
+
+    $validated = $request->validate([
+        'judul' => 'required|string|max:255',
+        'tempat' => 'required|string|max:255',
+        'jadwal' => 'required|date',
+        'kategori' => 'required|string',
+        'isi' => 'required|string',
+        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    if ($request->hasFile('thumbnail')) {
+        // Hapus yang lama jika ada
+        if ($event->thumbnail) {
+            Storage::delete('public/' . $event->thumbnail);
+        }
+
+        $validated['thumbnail'] = $request->file('thumbnail')->store('event_thumbnails', 'public');
+    }
+
+    $event->update($validated);
+
+    return redirect()->route('event.histori')->with('success', 'Event berhasil diperbarui.');
+}
     public function histori()
     {
         $events = Event::where('akun_id', Auth::id())
@@ -113,6 +145,8 @@ class EventController extends Controller
 
         return redirect()->back()->with('success', 'Event berhasil dihapus.');
     }
+
+
 
     public function indexAdmin()
     {
