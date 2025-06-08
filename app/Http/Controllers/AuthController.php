@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use App\Models\Akun;
+use App\Models\Konten;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +15,21 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     public function home() {
-        return view('user.index');
+        $popularContents = Konten::where('status', 'approved')
+                                ->orderBy('views_count', 'desc')
+                                ->take(3)
+                                ->get();
+
+        $upcomingEvents = Event::where('status', 'approved')
+                            ->where('jadwal', '>=', now())
+                            ->orderBy('views_count', 'desc')
+                            ->orderBy('jadwal', 'asc')
+                            ->take(2)
+                            ->get();
+
+        return view('user.index', compact('popularContents', 'upcomingEvents'));
     }
+
 
     public function dashboard() {
         return view('admin.dashboard');

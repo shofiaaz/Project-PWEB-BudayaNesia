@@ -158,42 +158,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Security Section -->
-            <div class="mt-8 pt-8 border-t border-gray-200">
-                <div class="flex items-center mb-6">
-                    <div class="w-1 h-8 bg-budanes rounded-full mr-3"></div>
-                    <h2 class="text-xl font-bold text-gray-800">Keamanan</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="" class="info-item bg-white p-4 rounded-xl border border-gray-200 shadow-sm text-left hover:border-budanes transition-all duration-300">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-budanes-light rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-key text-budanes"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-800">Ubah Password</p>
-                                <p class="text-sm text-gray-500">Perbarui password akun Anda</p>
-                            </div>
-                            <i class="fas fa-chevron-right text-gray-400"></i>
-                        </div>
-                    </a>
-
-                    <button class="info-item bg-white p-4 rounded-xl border border-gray-200 shadow-sm text-left hover:border-budanes transition-all duration-300">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-budanes-light rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-mobile-alt text-budanes"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-800">Verifikasi 2FA</p>
-                                <p class="text-sm text-gray-500">Aktifkan autentikasi dua faktor</p>
-                            </div>
-                            <i class="fas fa-chevron-right text-gray-400"></i>
-                        </div>
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -246,7 +210,7 @@
             text: "Apakah Anda yakin ingin keluar dari akun ini?",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#FFC107',
+            confirmButtonColor: '#A41313',
             cancelButtonColor: '#6B7280',
             confirmButtonText: 'Ya, Logout',
             cancelButtonText: 'Batal',

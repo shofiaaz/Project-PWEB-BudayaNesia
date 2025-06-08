@@ -38,9 +38,9 @@ Route::get('/home', [AuthController::class, 'home'])->name('home');
 
 //routes user
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::prefix('konten')->group(function () {
 
@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/konten/create', [KontenController::class, 'create'])->name('konten.create');
         Route::post('/store', [KontenController::class, 'store'])->name('konten.store');
         Route::delete('/konten/{id}', [KontenController::class, 'destroy'])->name('konten.destroy');
+        Route::get('/konten/{id}/edit', [KontenController::class, 'edit'])->name('konten.edit');
+        Route::put('/{id}', [KontenController::class, 'update'])->name('konten.update');
     });
 
     Route::prefix('event')->group(function () {

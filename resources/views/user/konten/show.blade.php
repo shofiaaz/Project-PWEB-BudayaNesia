@@ -148,40 +148,31 @@
                             <i class="fas fa-thumbtack text-budanes mr-2"></i> Konten Terkait
                         </h3>
 
-                        <div class="space-y-4">
-                            <!-- Related Item 1 -->
-                            <a href="#" class="flex gap-3 group">
-                                <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
-                                    <img src="https://via.placeholder.com/100" alt="Related" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800 group-hover:text-budanes transition-colors line-clamp-2">Sejarah Tari Saman dari Aceh</h4>
-                                    <p class="text-xs text-gray-500">Tarian</p>
-                                </div>
-                            </a>
-
-                            <!-- Related Item 2 -->
-                            <a href="#" class="flex gap-3 group">
-                                <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
-                                    <img src="https://via.placeholder.com/100" alt="Related" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800 group-hover:text-budanes transition-colors line-clamp-2">Makna Filosofis Batik Parang</h4>
-                                    <p class="text-xs text-gray-500">Kerajinan</p>
-                                </div>
-                            </a>
-
-                            <!-- Related Item 3 -->
-                            <a href="#" class="flex gap-3 group">
-                                <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
-                                    <img src="https://via.placeholder.com/100" alt="Related" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800 group-hover:text-budanes transition-colors line-clamp-2">Alat Musik Tradisional Gamelan</h4>
-                                    <p class="text-xs text-gray-500">Musik</p>
-                                </div>
-                            </a>
-                        </div>
+                        @if($relatedContents->count() > 0)
+                            <div class="space-y-4">
+                                @foreach($relatedContents as $related)
+                                <a href="{{ route('konten.show', $related->id) }}" class="flex gap-3 group">
+                                    <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
+                                        @if($related->thumbnail)
+                                            <img src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->judul }}" class="w-full h-full object-cover">
+                                        @else
+                                            <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                                <i class="fas fa-image"></i>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800 group-hover:text-budanes transition-colors line-clamp-2">
+                                            {{ $related->judul }}
+                                        </h4>
+                                        <p class="text-xs text-gray-500 capitalize">{{ $related->kategori }}</p>
+                                    </div>
+                                </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-gray-500 text-sm">Belum ada konten terkait</p>
+                        @endif
                     </div>
                 </div>
 
