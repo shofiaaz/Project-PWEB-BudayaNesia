@@ -60,7 +60,7 @@
                     {{-- Isi --}}
                     <div class="mb-6">
                         <label for="isi" class="block text-sm font-medium text-gray-700 font-poppins mb-2">
-                            <i class="fas fa-align-left mr-2"></i> Isi Konten
+                            <i class="fas fa-align-left mr-2"></i> Isi Event
                         </label>
                         <textarea id="isi" name="isi" rows="8" required
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-budanes font-poppins">{{ $event->isi }}</textarea>
@@ -69,7 +69,7 @@
                     {{-- Thumbnail --}}
                     <div class="mb-8">
                         <label class="block text-sm font-medium text-gray-700 font-poppins mb-2">
-                            <i class="fas fa-image mr-2"></i> Thumbnail Konten
+                            <i class="fas fa-image mr-2"></i> Thumbnail Event
                         </label>
                         @if($event->thumbnail)
                             <img src="{{ asset('storage/' . $event->thumbnail) }}" class="h-32 rounded mb-2">

@@ -55,16 +55,16 @@
 
                     <div class="mb-6">
                         <label for="isi" class="block text-sm font-medium text-gray-700 font-poppins mb-2">
-                            <i class="fas fa-align-left mr-2"></i> Isi Konten
+                            <i class="fas fa-align-left mr-2"></i> Isi Event
                         </label>
                         <textarea id="isi" name="isi" rows="8" required
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-budanes focus:border-transparent transition-all font-poppins"
-                            placeholder="Tuliskan konten budaya Anda secara detail..."></textarea>
+                            placeholder="Tuliskan Event yang Anda ingin buat secara detail..."></textarea>
                     </div>
 
                     <div class="mb-8">
                         <label class="block text-sm font-medium text-gray-700 font-poppins mb-2">
-                            <i class="fas fa-image mr-2"></i> Thumbnail Konten
+                            <i class="fas fa-image mr-2"></i> Thumbnail Event
                         </label>
                         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                             <div class="space-y-1 text-center">
@@ -82,11 +82,11 @@
                     </div>
 
                     <div class="flex justify-end space-x-4">
-                        <a href="{{ route('konten.index') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium font-poppins hover:bg-gray-50 transition-all">
+                        <a href="{{ route('event.index') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium font-poppins hover:bg-gray-50 transition-all">
                             Batal
                         </a>
                         <button type="submit" class="border-b-4 border-black px-6 py-3 bg-budanes text-white rounded-lg font-medium font-poppins hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                            Ajukan Konten
+                            Ajukan Event
                         </button>
                     </div>
                 </form>
