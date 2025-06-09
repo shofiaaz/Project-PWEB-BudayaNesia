@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
+    {{-- <!-- Hero Section --> --}}
     <div class="bg-[url('https://media.istockphoto.com/id/1370966473/video/balinese-barong-ritual-dance-at-traditional-festival-in-ubud-village-bali-indonesia.jpg?s=640x640&k=20&c=q54ieSUWlatKV6rKXlepEj5DO7ufp3rAYOEx7m83A_s=')] bg-cover bg-center text-white py-48">
         <div class="container mx-auto px-4">
             <div class="text-center">
@@ -14,11 +14,11 @@
         </div>
     </div>
 
-    <!-- Action Bar -->
+    {{-- <!-- Action Bar --> --}}
     <div class="container mx-auto px-4 py-6">
         <form method="GET" action="{{ route('konten.index') }}">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <!-- Search Bar -->
+                {{-- <!-- Search Bar --> --}}
                 <div class="w-full md:w-auto flex-1 max-w-md">
                     <div class="relative">
                         <input type="text" name="search" value="{{ request('search') }}"
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <!-- Add Content Button (only show if logged in) -->
+                {{-- <!-- Add Content --> --}}
                 @auth
                 <a href="{{route('konten.create')}}" class="text-white border-b-4 border-black w-full md:w-auto bg-budanes font-bold px-6 py-3 rounded-lg font-poppins hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
                     <i class="fas fa-plus"></i>
@@ -39,12 +39,12 @@
         </form>
     </div>
 
-    <!-- Filter Section -->
+    {{-- <!-- Filter Section --> --}}
     <div class="container mx-auto px-4 mb-8">
         <form method="GET" action="{{ route('konten.index') }}" id="filterForm">
-            <!-- Wrapper Flex for Category and Province -->
+            {{-- <!-- Wrapper Flex  --> --}}
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 flex-wrap">
-                <!-- Category Buttons Filter -->
+                {{-- <!-- Category --> --}}
                 <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                     <button type="button" name="kategori" value="semua"
                         class="px-8 py-4 rounded-full text-sm font-medium transition-all
@@ -76,7 +76,6 @@
                         {{ request('kategori') == 'upacara' ? 'bg-budanes text-white' : 'bg-white text-gray-700 border border-gray-500 hover:border-budanes hover:text-budanes' }}">
                         Upacara
                     </button>
-                    <!-- Hidden input for actual form submission -->
                     <input type="hidden" name="kategori" id="kategoriInput" value="{{ request('kategori') }}">
                 </div>
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 // Route::get('/', function () {
 //     return view('user.index');
 // });
+Route::get('/', [AuthController::class, 'home'])->name('welcome');
 
 // guest
 Route::get('/user', [AuthController::class, 'home']);

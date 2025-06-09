@@ -4,8 +4,8 @@
 <div class="container mx-auto px-4 py-8 mt-14 p-4 sm:ml-64">
     <div class="min-h-screen bg-gray-50">
 
-    <!-- Header Section -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    {{-- Header Section  --}}
+    <div class="flex flex-col sm:flex-row justify-center items-center sm:items-center mb-6 gap-4">
         <div>
             <h1 class="text-3xl font-bold text-black flex items-center">
                 <i class="fas fa-chart-line text-budanes mr-3"></i>
@@ -15,10 +15,10 @@
         </div>
     </div>
 
-        <!-- Statistics Cards -->
+        {{-- Statistics Cards --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <!-- Total Users -->
+                {{-- Total Users --}}
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300">
                     <div class="w-16 h-16 mx-auto bg-gradient-to-r from-budanes to-budanes-darker rounded-full flex items-center justify-center text-white mb-4">
                         <i class="fas fa-users text-2xl"></i>
@@ -27,7 +27,7 @@
                     <p class="text-gray-600 text-sm">Kontributor Aktif</p>
                 </div>
 
-                <!-- Total Contents -->
+                {{-- Total Contents --}}
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300">
                     <div class="w-16 h-16 mx-auto bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4">
                         <i class="fas fa-file-alt text-2xl"></i>
@@ -36,7 +36,7 @@
                     <p class="text-gray-600 text-sm">Konten Approved</p>
                 </div>
 
-                <!-- Total Events -->
+                {{-- Total Events --}}
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300">
                     <div class="w-16 h-16 mx-auto bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white mb-4">
                         <i class="fas fa-calendar-alt text-2xl"></i>
@@ -45,7 +45,7 @@
                     <p class="text-gray-600 text-sm">Event Approved</p>
                 </div>
 
-                <!-- Total Views -->
+                {{-- Total Views --}}
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300">
                     <div class="w-16 h-16 mx-auto bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4">
                         <i class="fas fa-eye text-2xl"></i>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <!-- User Contributions Section -->
+            {{-- User Contributions Section --}}
             <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
                 <div class="p-6 border-b border-gray-200">
                     <h2 class="font-bold text-2xl text-gray-800 flex items-center">
@@ -151,9 +151,9 @@
                 </div>
             </div>
 
-            <!-- Content Performance Section -->
+            {{-- Content Performance Section --}}
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                <!-- Top Contents -->
+                {{-- Top Contents --}}
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                     <div class="p-6 border-b border-gray-200">
                         <h2 class="font-bold text-2xl text-gray-800 flex items-center">
@@ -188,7 +188,7 @@
                     </div>
                 </div>
 
-                <!-- Top Events -->
+                {{-- Top Events --}}
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                     <div class="p-6 border-b border-gray-200">
                         <h2 class="font-bold text-2xl text-gray-800 flex items-center">
