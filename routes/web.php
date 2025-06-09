@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PetaBudayaController;
 
 // Route::get('/', function () {
 //     return view('user.index');
@@ -36,6 +37,12 @@ Route::get('/login', [AuthController::class, 'ShowLogin'])->name('login');
 // logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [AuthController::class, 'home'])->name('home');
+
+// Route untuk halaman peta budaya
+Route::get('/peta-budaya', [PetaBudayaController::class, 'index'])->name('peta-budaya');
+
+// Route modal content
+Route::get('/konten/{id}', [PetaBudayaController::class, 'show'])->name('konten.show');
 
 //routes user
 Route::group(['middleware' => ['auth']], function() {
