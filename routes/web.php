@@ -10,9 +10,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('user.index');
-});
+// Route::get('/', function () {
+//     return view('user.index');
+// });
 
 // guest
 Route::get('/user', [AuthController::class, 'home']);

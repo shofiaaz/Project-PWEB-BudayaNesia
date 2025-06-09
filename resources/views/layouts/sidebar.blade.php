@@ -1,68 +1,75 @@
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-300 sm:translate-x-0" aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto">
-        <ul class="space-y-3 font-montserrat">
-            <li>
-                <a href="" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
-                    <i class="fas fa-tachometer-alt w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
-                    <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Dashboard</span>
-                    <span class="flex-1 flex justify-end">
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-budanes-dark"></i>
-                    </span>
-                </a>
-            </li>
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-amber-50 border-r border-amber-200 sm:translate-x-0 shadow-lg" aria-label="Sidebar">
+    <div class="h-full px-4 pb-4 overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-sm p-2 mb-4 border border-amber-100">
+            <ul class="space-y-2 font-montserrat">
+                <li>
+                    <a href="" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                        <i class="fas fa-tachometer-alt w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
+                        <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Dashboard</span>
+                        <span class="flex-1 flex justify-end">
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600"></i>
+                        </span>
+                    </a>
+                </li>
 
-            <li>
-                <a href={{ route('admin.konten.index') }} class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
-                    <i class="fas fa-box-open w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
-                    <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Konten</span>
-                    <span class="flex-1 flex justify-end items-center">
-                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-900 bg-budanes-dark rounded-full">{{ $total ?? 0 }}</span>
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-budanes-dark ml-2"></i>
-                    </span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.konten.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                        <i class="fas fa-box-open w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
+                        <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Konten</span>
+                        <span class="flex-1 flex justify-end items-center">
+                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full shadow-sm">{{ $total ?? 0 }}</span>
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600 ml-2"></i>
+                        </span>
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ route('admin.events.index') }}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
-                    <i class="fas fa-exchange-alt w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
-                    <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Event</span>
-                    <span class="flex-1 flex justify-end items-center">
-                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-900 bg-budanes-dark rounded-full">{{ $newTransactions ?? 0 }}</span>
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-budanes-dark ml-2"></i>
-                    </span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.events.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                        <i class="fas fa-calendar-alt w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
+                        <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Event</span>
+                        <span class="flex-1 flex justify-end items-center">
+                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full shadow-sm">{{ $newTransactions ?? 0 }}</span>
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600 ml-2"></i>
+                        </span>
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{route('admin.laporan.index')}}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
-                    <i class="fas fa-chart-line w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
-                    <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Laporan</span>
-                    <span class="flex-1 flex justify-end">
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-budanes-dark"></i>
-                    </span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.laporan.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                        <i class="fas fa-chart-line w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
+                        <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Laporan</span>
+                        <span class="flex-1 flex justify-end">
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600"></i>
+                        </span>
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{route('admin.profile')}}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-budanes-dark hover:border-b-4 border-budanes-dark">
-                    <i class="fas fa-user w-5 h-5 text-black group-hover:text-budanes-dark transition duration-200"></i>
-                    <span class="group-hover:text-budanes-dark text-black font-bold ml-4">Akun</span>
-                    <span class="flex-1 flex justify-end">
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-budanes-dark"></i>
-                    </span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.profile') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                        <i class="fas fa-user w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
+                        <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Akun</span>
+                        <span class="flex-1 flex justify-end">
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <li class="mt-8 pt-4 border-t border-gray-700">
-                <a href="{{ route('logout') }}" class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-gray-800 group transition-all duration-200 hover:text-red-400 hover:border-b-4 border-red-400" id="logout-button">
-                    <i class="fas fa-sign-out-alt w-5 h-5 text-black group-hover:text-red-400 transition duration-200"></i>
-                    <span class="group-hover:text-red-400 text-black font-bold ml-4">Keluar</span>
-                    <span class="flex-1 flex justify-end">
-                        <i class="fas fa-chevron-right text-xs text-gray-500 group-hover:text-red-400"></i>
-                    </span>
-                </a>
-            </li>
-        </ul>
+        <!-- Logout Section -->
+        <div class="bg-white rounded-xl shadow-sm p-2 border border-amber-100">
+            <ul class="font-montserrat">
+                <li>
+                    <a href="{{ route('logout') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-red-50 group transition-all duration-200 hover:text-red-600 hover:shadow-md" id="logout-button">
+                        <i class="fas fa-sign-out-alt w-5 h-5 text-red-500 group-hover:text-red-600 transition duration-200"></i>
+                        <span class="group-hover:text-red-600 text-gray-800 font-semibold ml-4">Keluar</span>
+                        <span class="flex-1 flex justify-end">
+                            <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-red-500"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </aside>
 
@@ -72,8 +79,8 @@
 
 <!-- Mobile menu button -->
 <div class="sm:hidden fixed top-4 left-4 z-50">
-    <button id="mobile-menu-button" class="text-gray-300 hover:text-budanes-dark focus:outline-none">
-        <i class="fas fa-bars text-2xl"></i>
+    <button id="mobile-menu-button" class="bg-amber-100 hover:bg-amber-200 p-2 rounded-lg shadow-md text-orange-600 hover:text-orange-700 focus:outline-none transition-all duration-200">
+        <i class="fas fa-bars text-xl"></i>
     </button>
 </div>
 
@@ -93,17 +100,17 @@
             text: "Apakah anda yakin ingin logout?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: 'var(--danger-color)',
-            cancelButtonColor: 'var(--danger-color)',
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
             confirmButtonText: 'Ya, Logout',
             cancelButtonText: 'Batal',
             backdrop: 'rgba(0,0,0,0.8)',
             customClass: {
                 container: 'font-montserrat',
                 title: 'text-gray-900',
-                htmlContainer: 'text-black',
-                confirmButton: 'bg-budanes hover:bg-budanes-dark-dark text-gray-50 font-medium',
-                cancelButton: 'bg-gray-700 hover:bg-gray-600 text-gray-300 font-medium'
+                htmlContainer: 'text-gray-700',
+                confirmButton: 'bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg',
+                cancelButton: 'bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-lg'
             }
         }).then((result) => {
             if (result.isConfirmed) {
@@ -122,5 +129,23 @@
                 sidebar.classList.add('-translate-x-full');
             }
         }
+    });
+
+    // Add active state to current page
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPath = window.location.pathname;
+        const menuItems = document.querySelectorAll('#default-sidebar a[href]');
+
+        menuItems.forEach(item => {
+            if (item.getAttribute('href') === currentPath) {
+                item.classList.add('bg-orange-100', 'text-orange-700', 'shadow-md');
+                item.classList.remove('text-gray-700');
+                const icon = item.querySelector('i');
+                if (icon) {
+                    icon.classList.add('text-orange-700');
+                    icon.classList.remove('text-orange-600');
+                }
+            }
+        });
     });
 </script>
