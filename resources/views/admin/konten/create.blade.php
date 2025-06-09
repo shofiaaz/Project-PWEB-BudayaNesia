@@ -10,7 +10,7 @@
 
             <div class="bg-white shadow-xl rounded-lg overflow-hidden">
                 <div class="p-6 sm:p-8">
-                    <form action="{{ route('konten.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.konten.storeAdmin') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-6">

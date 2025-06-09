@@ -82,6 +82,35 @@ class KontenController extends Controller
         return redirect()->route('konten.histori');
     }
 
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required|max:255',
+            'kategori' => 'required|in:tarian,musik,kuliner,upacara,kerajinan',
+            'asal' => 'required',
+            'isi' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->store('konten-thumbnails', 'public');
+        }
+
+        Konten::create([
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'kategori' => $request->kategori,
+            'asal' => $request->asal,
+            'thumbnail' => $thumbnailPath,
+            'akun_id' => Auth::id(),
+            'status' => 'pending'
+        ]);
+
+        Alert::success('Sukses', 'Konten budaya berhasil diajukan!');
+        return redirect()->route('admin.konten.index');
+    }
+
     public function show($id)
     {
         $content = Konten::with('akun')->findOrFail($id);

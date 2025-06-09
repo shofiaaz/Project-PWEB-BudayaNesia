@@ -74,6 +74,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/konten/create', [AdminController::class, 'create'])->name('konten.create');
+    Route::post('/konten/storeAdmin', [KontenController::class, 'storeAdmin'])->name('konten.storeAdmin');
     Route::get('/konten/read', [AdminController::class, 'index'])->name('konten.index');
     Route::get('/konten/{id}/edit', [AdminController::class, 'edit'])->name('konten.edit');
     Route::put('/konten/{id}', [AdminController::class, 'update'])->name('konten.update');
