@@ -157,7 +157,7 @@
                             </div>
                             <h3 class="text-xl font-bold text-dark mb-2">{{ $content->judul }}</h3>
                             <p class="text-gray-600 mb-4">{{ Str::limit($content->isi, 100) }}</p>
-                            <a href="{{ route('konten.show', $content->id) }}" class="text-budanes-darker font-semibold hover:underline flex items-center">
+                            <a href="{{ route('kontenbudaya.show', $content->id) }}" class="text-budanes-darker font-semibold hover:underline flex items-center">
                                 Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
                             </a>
                         </div>

@@ -110,7 +110,7 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($contents as $content)
-                <a href="{{ route('konten.show', $content->id) }}" class="block h-full">
+                <a href="{{ route('kontenbudaya.show', $content->id) }}" class="block h-full">
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
                         <!-- Image Section with Fixed Height -->
                         <div class="relative h-48 bg-gradient-to-br from-budanes to-budanes-dark flex-shrink-0">

@@ -23,8 +23,7 @@ Route::get('/user/regis', function () {
 })->name('regis');
 
 Route::get('/user/konten', [KontenController::class, 'index'])->name('konten.index');
-Route::get('/konten/{id}', [KontenController::class, 'show'])->name('konten.show');
-
+Route::get('/konten-detail/{id}', [KontenController::class, 'show'])->name('kontenbudaya.show');
 
 Route::get('/user/event', [EventController::class, 'index'])->name('event.index');
 Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');

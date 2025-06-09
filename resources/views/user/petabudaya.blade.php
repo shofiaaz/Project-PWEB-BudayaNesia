@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-b from-budanes to-budanes-darker py-8">
     <div class="container mx-auto px-4">
-        {{--  Header Section  --}}
+        {{--  --}}
         <div class="text-center mb-12 animate-fade-in">
             <h1 class="text-4xl md:text-5xl font-bold text-white font-poppins mb-4">Peta Budaya Indonesia</h1>
             <p class="text-xl text-white font-montserrat max-w-3xl mx-auto">
@@ -11,21 +11,20 @@
             </p>
         </div>
 
-         Map and Content Container
         <div class="flex flex-col lg:flex-row gap-8">
-             Map Section
+            <!-- Map Section -->
             <div class="lg:w-2/3 bg-white rounded-xl shadow-2xl overflow-hidden">
                 <div id="map" class="w-full h-96 lg:h-[600px] rounded-xl"></div>
             </div>
 
-            {{--  Content List Section  --}}
+            {{-- --}}
             <div class="lg:w-1/3">
                 <div class="bg-white rounded-xl shadow-xl p-6 h-full">
                     <h2 class="text-2xl font-bold text-budanes-darker font-poppins mb-6 border-b pb-2">
                         <i class="fas fa-list-ul mr-2"></i> Daftar Konten Budaya
                     </h2>
 
-                    {{--  Search and Filter  --}}
+                    {{-- --}}
                     <div class="mb-6">
                         <div class="relative">
                             <input type="text" placeholder="Cari konten budaya..."
@@ -45,7 +44,7 @@
                         </div>
                     </div>
 
-                    {{--  Content List  --}}
+                    {{----}}
                     <div id="content-list" class="overflow-y-auto max-h-[500px] pr-2">
                         @foreach($contents as $content)
                         <div class="content-item mb-4 p-4 rounded-lg border border-gray-300 hover:shadow-md transition-all cursor-pointer"
@@ -74,7 +73,7 @@
         </div>
     </div>
 
-    {{--  Modal for Content Detail  --}}
+    {{-- --}}
     <div id="content-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6">
@@ -138,42 +137,42 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // const provinceCoordinates = {
-        //     'Aceh': [4.6951, 96.7494],
-        //     'Sumatera Utara': [2.1154, 99.5451],
-        //     'Sumatera Barat': [-0.7397, 100.8000],
-        //     'Riau': [0.2933, 101.7068],
-        //     'Jambi': [-1.4852, 102.4380],
-        //     'Sumatera Selatan': [-3.3194, 103.9144],
-        //     'Bengkulu': [-3.5778, 102.3464],
-        //     'Lampung': [-4.5586, 105.4068],
-        //     'Bangka Belitung': [-2.4961, 106.4396],
-        //     'Kepulauan Riau': [3.9456, 108.1429],
-        //     'DKI Jakarta': [-6.2088, 106.8456],
-        //     'Jawa Barat': [-6.9147, 107.6098],
-        //     'Jawa Tengah': [-7.1509, 110.1403],
-        //     'DI Yogyakarta': [-7.7956, 110.3695],
-        //     'Jawa Timur': [-7.5361, 112.2384],
-        //     'Banten': [-6.4058, 106.0640],
-        //     'Bali': [-8.3405, 115.0920],
-        //     'Nusa Tenggara Barat': [-8.6529, 117.3616],
-        //     'Nusa Tenggara Timur': [-8.6574, 121.0794],
-        //     'Kalimantan Barat': [-0.2788, 111.4753],
-        //     'Kalimantan Tengah': [-1.6815, 113.3824],
-        //     'Kalimantan Selatan': [-3.0926, 115.2838],
-        //     'Kalimantan Timur': [0.5389, 116.4194],
-        //     'Kalimantan Utara': [3.0738, 116.0414],
-        //     'Sulawesi Utara': [0.6247, 123.9750],
-        //     'Sulawesi Tengah': [-1.4300, 121.4456],
-        //     'Sulawesi Selatan': [-3.6688, 119.9741],
-        //     'Sulawesi Tenggara': [-3.5491, 121.7270],
-        //     'Gorontalo': [0.6999, 122.4467],
-        //     'Sulawesi Barat': [-2.8441, 119.2321],
-        //     'Maluku': [-3.2385, 130.1453],
-        //     'Maluku Utara': [1.5709, 127.8088],
-        //     'Papua Barat': [-1.3361, 133.1747],
-        //     'Papua': [-4.2699, 138.0804]
-        // };
+        const provinceCoordinates = {
+            'Aceh': [4.6951, 96.7494],
+            'Sumatera Utara': [2.1154, 99.5451],
+            'Sumatera Barat': [-0.7397, 100.8000],
+            'Riau': [0.2933, 101.7068],
+            'Jambi': [-1.4852, 102.4380],
+            'Sumatera Selatan': [-3.3194, 103.9144],
+            'Bengkulu': [-3.5778, 102.3464],
+            'Lampung': [-4.5586, 105.4068],
+            'Bangka Belitung': [-2.4961, 106.4396],
+            'Kepulauan Riau': [3.9456, 108.1429],
+            'DKI Jakarta': [-6.2088, 106.8456],
+            'Jawa Barat': [-6.9147, 107.6098],
+            'Jawa Tengah': [-7.1509, 110.1403],
+            'DI Yogyakarta': [-7.7956, 110.3695],
+            'Jawa Timur': [-7.5361, 112.2384],
+            'Banten': [-6.4058, 106.0640],
+            'Bali': [-8.3405, 115.0920],
+            'Nusa Tenggara Barat': [-8.6529, 117.3616],
+            'Nusa Tenggara Timur': [-8.6574, 121.0794],
+            'Kalimantan Barat': [-0.2788, 111.4753],
+            'Kalimantan Tengah': [-1.6815, 113.3824],
+            'Kalimantan Selatan': [-3.0926, 115.2838],
+            'Kalimantan Timur': [0.5389, 116.4194],
+            'Kalimantan Utara': [3.0738, 116.0414],
+            'Sulawesi Utara': [0.6247, 123.9750],
+            'Sulawesi Tengah': [-1.4300, 121.4456],
+            'Sulawesi Selatan': [-3.6688, 119.9741],
+            'Sulawesi Tenggara': [-3.5491, 121.7270],
+            'Gorontalo': [0.6999, 122.4467],
+            'Sulawesi Barat': [-2.8441, 119.2321],
+            'Maluku': [-3.2385, 130.1453],
+            'Maluku Utara': [1.5709, 127.8088],
+            'Papua Barat': [-1.3361, 133.1747],
+            'Papua': [-4.2699, 138.0804]
+        };
 
         // MARKER BUAT KONTEN
         const markers = {};
