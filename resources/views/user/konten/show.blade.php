@@ -151,7 +151,7 @@
                         @if($relatedContents->count() > 0)
                             <div class="space-y-4">
                                 @foreach($relatedContents as $related)
-                                <a href="{{ route('konten.show', $related->id) }}" class="flex gap-3 group">
+                                <a href="{{ route('kontenbudaya.show', $related->id) }}" class="flex gap-3 group">
                                     <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
                                         @if($related->thumbnail)
                                             <img src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->judul }}" class="w-full h-full object-cover">

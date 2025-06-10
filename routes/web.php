@@ -10,10 +10,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PetaBudayaController;
 
 // Route::get('/', function () {
 //     return view('user.index');
 // });
+Route::get('/', [AuthController::class, 'home'])->name('welcome');
 
 // guest
 Route::get('/user', [AuthController::class, 'home']);
@@ -22,8 +24,7 @@ Route::get('/user/regis', function () {
 })->name('regis');
 
 Route::get('/user/konten', [KontenController::class, 'index'])->name('konten.index');
-Route::get('/konten/{id}', [KontenController::class, 'show'])->name('konten.show');
-
+Route::get('/konten-detail/{id}', [KontenController::class, 'show'])->name('kontenbudaya.show');
 
 Route::get('/user/event', [EventController::class, 'index'])->name('event.index');
 Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
@@ -36,6 +37,12 @@ Route::get('/login', [AuthController::class, 'ShowLogin'])->name('login');
 // logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [AuthController::class, 'home'])->name('home');
+
+// Route untuk halaman peta budaya
+Route::get('/peta-budaya', [PetaBudayaController::class, 'index'])->name('peta-budaya');
+
+// Route modal content
+Route::get('/konten/{id}', [PetaBudayaController::class, 'show'])->name('konten.show');
 
 //routes user
 Route::group(['middleware' => ['auth']], function() {

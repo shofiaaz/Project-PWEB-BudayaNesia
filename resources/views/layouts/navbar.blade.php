@@ -20,6 +20,7 @@
                     <a href="{{route('home')}}" class="menu-item font-bold transition duration-200 hover:text-budanes">HOME</a>
                     <a href="{{route('konten.index')}}" class="menu-item font-bold transition duration-200 hover:text-budanes">KONTEN BUDAYA</a>
                     <a href="{{route('event.index')}}"  class="menu-item font-bold transition duration-200 hover:text-budanes">EVENT BUDAYA</a>
+                    <a href="{{route('peta-budaya')}}"  class="menu-item font-bold transition duration-200 hover:text-budanes">PETA BUDAYA</a>
 
                     <div class="flex items-center space-x-4">
                         @auth
