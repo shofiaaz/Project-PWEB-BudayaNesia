@@ -14,7 +14,7 @@
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Map Section -->
             <div class="lg:w-2/3 bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div id="map" class="w-full h-96 lg:h-[600px] rounded-xl"></div>
+                <div id="map" class="w-full h-96 lg:h-[750px] rounded-xl"></div>
             </div>
 
             {{-- --}}
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    {{-- --}}
+    {{--konten modal --}}
     <div id="content-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6">

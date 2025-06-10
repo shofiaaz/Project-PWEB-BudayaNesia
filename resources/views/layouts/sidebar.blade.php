@@ -28,7 +28,7 @@
                         <i class="fas fa-calendar-alt w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
                         <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Event</span>
                         <span class="flex-1 flex justify-end items-center">
-                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full shadow-sm">{{ $newTransactions ?? 0 }}</span>
+                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full shadow-sm">{{ $totalEvents ?? 0 }}</span>
                             <i class="fas fa-chevron-right text-xs text-gray-400 group-hover:text-orange-600 ml-2"></i>
                         </span>
                     </a>

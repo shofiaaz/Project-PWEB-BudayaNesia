@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center px-4 py-8">
-    <div class="w-full max-w-screen-xl h-[70vh] bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="w-full max-w-screen-xl h-[80vh] bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="flex flex-col lg:flex-row h-full"> <div class="lg:w-1/2 login-bg hidden lg:block relative h-full"> <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-10">
                     <div class="text-center">
-                        <h2 class="text-5xl font-bold text-white mb-4 animate-fade-in" style="font-family: 'Lily Script One', cursive;">BudayaNesia</h2>
-                        <p class="text-white text-xl animate-fade-in" style="animation-delay: 0.2s;">Eksplorasi seluruh kekayaan budaya indonesia</p>
+                        <h2 class="text-xl font-bold text-white mb-4 animate-fade-in" style="font-family: 'Lily Script One', cursive;">BudayaNesia</h2>
+                        <p class="text-white text-l animate-fade-in" style="animation-delay: 0.2s;">Eksplorasi seluruh kekayaan budaya indonesia</p>
                     </div>
                 </div>
             </div>
 
             <div class="bg-gray-900 border-2 border-b-8 border-black lg:w-1/2 p-8 md:p-12 flex flex-col justify-center h-full"> <div class="text-center mb-8">
-                    <h1 class="text-4xl font-bold text-white mb-2 animate-fade-in">Welcome back to <span class="bg-red-700 bg-clip-text text-transparent" style="font-family: 'Lily Script One', cursive;">BudayaNesia</span></h1>
+                    <h1 class="text-xl font-bold text-white mb-2 animate-fade-in">Welcome back to <span class="bg-red-700 bg-clip-text text-transparent" style="font-family: 'Lily Script One', cursive;">BudayaNesia</span></h1>
                     <p class="text-white text-lg animate-fade-in" style="animation-delay: 0.1s;">Silakan masuk ke akun Anda</p>
                 </div>
 

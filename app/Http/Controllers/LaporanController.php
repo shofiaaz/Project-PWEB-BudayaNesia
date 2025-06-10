@@ -47,7 +47,8 @@ class LaporanController extends Controller
 
         $totalakun = $akunWithContributions->count();
         $totalkonten = $approvedkonten->count();
-        $totalEvents = $approvedEvents->count();
+        $totalEvents = Event::count();
+        $totalEventsApp = $approvedEvents->count();
         $totalViews = $approvedkonten->sum('views_count') + $approvedEvents->sum('views_count');
 
         return view('admin.laporan.index', compact(
@@ -57,6 +58,7 @@ class LaporanController extends Controller
             'totalakun',
             'totalkonten',
             'totalEvents',
+            'totalEventsApp',
             'totalViews',
             'total'
         ));
