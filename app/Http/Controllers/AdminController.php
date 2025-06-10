@@ -93,8 +93,9 @@ class AdminController extends Controller
     }
     public function profile()
     {
+        $total = Konten::count();
         $admin = Auth::user();
-        return view('admin.profile.index', compact('admin'));
+        return view('admin.profile.index', compact('admin', 'total'));
     }
 
     public function editProfile()

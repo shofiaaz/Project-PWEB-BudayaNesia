@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Konten;
 use App\Models\Event;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
@@ -151,7 +152,8 @@ public function update(Request $request, $id)
     public function indexAdmin()
     {
         $events = Event::all();
-        return view('admin.event.index', compact('events'));
+        $total = Konten::count();
+        return view('admin.event.index', compact('events', 'total'));
     }
 
     public function createAdmin()

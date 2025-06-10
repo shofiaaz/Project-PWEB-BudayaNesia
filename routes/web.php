@@ -8,6 +8,7 @@ use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 
 // Route::get('/', function () {
@@ -71,7 +72,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 //admin
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/konten/create', [AdminController::class, 'create'])->name('konten.create');
     Route::post('/konten/storeAdmin', [KontenController::class, 'storeAdmin'])->name('konten.storeAdmin');

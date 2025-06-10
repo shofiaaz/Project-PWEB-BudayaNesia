@@ -12,7 +12,6 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        // Ambil user dengan kontribusi konten dan event yang sudah approved
         $akunWithContributions = Akun::select('akun.*')
             ->leftJoin('konten', function($join) {
                 $join->on('akun.id', '=', 'konten.akun_id')
@@ -34,20 +33,18 @@ class LaporanController extends Controller
             ->orderByDesc('total_contribution')
             ->get();
 
-        // Ambil semua konten yang sudah approved, urutkan berdasarkan views terbanyak
         $approvedkonten = Konten::where('status', 'approved')
             ->orderByDesc('views_count')
-            ->with('akun') // Assuming ada relasi dengan user
+            ->with('akun')
             ->get();
 
+        $total = Konten::count();
 
-        // Ambil semua event yang sudah approved, urutkan berdasarkan views terbanyak
         $approvedEvents = Event::where('status', 'approved')
             ->orderByDesc('views_count')
-            ->with('akun') // Assuming ada relasi dengan user
+            ->with('akun')
             ->get();
 
-        // Statistik ringkasan
         $totalakun = $akunWithContributions->count();
         $totalkonten = $approvedkonten->count();
         $totalEvents = $approvedEvents->count();
@@ -60,7 +57,8 @@ class LaporanController extends Controller
             'totalakun',
             'totalkonten',
             'totalEvents',
-            'totalViews'
+            'totalViews',
+            'total'
         ));
     }
 }

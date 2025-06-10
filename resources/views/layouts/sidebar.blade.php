@@ -3,7 +3,7 @@
         <div class="bg-white rounded-xl shadow-sm p-2 mb-4 border border-amber-100">
             <ul class="space-y-2 font-montserrat">
                 <li>
-                    <a href="" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
+                    <a href="{{ route('admin.dashboard')}}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-amber-100 group transition-all duration-200 hover:text-orange-700 hover:shadow-md">
                         <i class="fas fa-tachometer-alt w-5 h-5 text-orange-600 group-hover:text-orange-700 transition duration-200"></i>
                         <span class="group-hover:text-orange-700 text-gray-800 font-semibold ml-4">Dashboard</span>
                         <span class="flex-1 flex justify-end">
