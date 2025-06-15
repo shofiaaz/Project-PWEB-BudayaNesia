@@ -15,10 +15,15 @@ class DashboardController extends Controller
     {
         $stats = $this->getBasicStats();
         $recentActivities = $this->getRecentActivities();
+        $totalEvents = Event::count();
+        $total = Konten::count();
+
 
         return view('admin.dashboard', compact(
             'stats',
             'recentActivities',
+             'total',
+             'totalEvents'
         ));
     }
 

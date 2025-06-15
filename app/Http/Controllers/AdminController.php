@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Konten;
+use App\Models\Event;
 use App\Models\Akun;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $query = Konten::with('akun');
+        $totalEvents = Event::count();
         $total = Konten::count();
 
         if ($request->has('kategori') && $request->kategori != 'semua') {
@@ -33,7 +35,7 @@ class AdminController extends Controller
 
         $contents = $query->paginate(10);
 
-        return view('admin.konten.index', compact('contents', 'total'));
+        return view('admin.konten.index', compact('contents', 'total','totalEvents' ));
     }
 
 
@@ -95,7 +97,8 @@ class AdminController extends Controller
     {
         $total = Konten::count();
         $admin = Auth::user();
-        return view('admin.profile.index', compact('admin', 'total'));
+        $totalEvents = Event::count();
+        return view('admin.profile.index', compact('admin', 'total', 'totalEvents'));
     }
 
     public function editProfile()

@@ -38,7 +38,6 @@ class LaporanController extends Controller
             ->with('akun')
             ->get();
 
-        $total = Konten::count();
 
         $approvedEvents = Event::where('status', 'approved')
             ->orderByDesc('views_count')
@@ -48,6 +47,7 @@ class LaporanController extends Controller
         $totalakun = $akunWithContributions->count();
         $totalkonten = $approvedkonten->count();
         $totalEvents = Event::count();
+        $total = Konten::count();
         $totalEventsApp = $approvedEvents->count();
         $totalViews = $approvedkonten->sum('views_count') + $approvedEvents->sum('views_count');
 

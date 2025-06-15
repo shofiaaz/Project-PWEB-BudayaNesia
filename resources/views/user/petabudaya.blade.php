@@ -7,7 +7,7 @@
         <div class="text-center mb-12 animate-fade-in">
             <h1 class="text-4xl md:text-5xl font-bold text-white font-poppins mb-4">Peta Budaya Indonesia</h1>
             <p class="text-xl text-white font-montserrat max-w-3xl mx-auto">
-                Jelajahi kekayaan budaya Indonesia dari berbagai provinsi melalui peta interaktif kami.
+                Jelajahi kekayaan budaya Indonesia melalui konten yang berasal dari berbagai provinsi melalui peta interaktif.
             </p>
         </div>
 
@@ -26,13 +26,6 @@
 
                     {{-- --}}
                     <div class="mb-6">
-                        <div class="relative">
-                            <input type="text" placeholder="Cari konten budaya..."
-                                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-budanes">
-                            <button class="absolute right-3 top-2 text-gray-400">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
                         <div class="flex flex-wrap gap-2 mt-3">
                             <button class="filter-btn active px-3 py-1 rounded-full text-sm bg-budanes text-white" data-filter="all">Semua</button>
                             <button class="filter-btn px-3 py-1 rounded-full text-sm bg-gray-200" data-filter="tarian">Tarian</button>

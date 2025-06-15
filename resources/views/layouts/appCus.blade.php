@@ -26,8 +26,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
 
     <style>
         .animate-fade-in {
@@ -93,6 +94,72 @@
         .animate-delay-200 { animation-delay: 0.2s; }
         .animate-delay-300 { animation-delay: 0.3s; }
         [x-cloak] { display: none !important; }
+        /* konten */
+        /* Custom pagination styling */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .pagination li {
+            margin: 0 0.25rem;
+        }
+
+        .pagination li a,
+        .pagination li span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: 600;
+            color: #4b5563;
+            background-color: #f3f4f6;
+            transition: all 0.3s ease;
+        }
+
+        .pagination li.active a {
+            background-color: #20f2f6;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .pagination li a:hover {
+            background-color: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .pagination li:first-child a,
+        .pagination li:last-child a {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 9999px;
+        }
+
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -161,5 +228,6 @@
         }, 5000);
     </script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 </body>
 </html>

@@ -19,9 +19,6 @@ Route::get('/', [AuthController::class, 'home'])->name('welcome');
 
 // guest
 Route::get('/user', [AuthController::class, 'home']);
-Route::get('/user/regis', function () {
-    return view('user.regis');
-})->name('regis');
 
 Route::get('/user/konten', [KontenController::class, 'index'])->name('konten.index');
 Route::get('/konten-detail/{id}', [KontenController::class, 'show'])->name('kontenbudaya.show');
@@ -31,9 +28,16 @@ Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
 
 
 // route Login n regis submit
-Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/login', [AuthController::class, 'ShowLogin'])->name('login');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/user/regis', function () {
+        return view('user.regis');
+    })->name('regis');
+
+    Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
+    Route::get('/login', [AuthController::class, 'ShowLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+});
+
 // logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [AuthController::class, 'home'])->name('home');

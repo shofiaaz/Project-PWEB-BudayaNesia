@@ -153,7 +153,8 @@ public function update(Request $request, $id)
     {
         $events = Event::all();
         $total = Konten::count();
-        return view('admin.event.index', compact('events', 'total'));
+        $totalEvents = Event::count();
+        return view('admin.event.index', compact('events', 'total', 'totalEvents'));
     }
 
     public function createAdmin()
@@ -164,27 +165,33 @@ public function update(Request $request, $id)
     public function storeAdmin(Request $request)
     {
         $request->validate([
-            'akun_id' => 'required|exists:akun,id',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'judul' => 'required|string|max:255',
-            'jadwal' => 'required|date',
-            'tempat' => 'required|string|max:255',
-            'isi' => 'required|string',
+            'judul' => 'required|max:255',
             'kategori' => 'required|in:tarian,musik,kuliner,upacara,kerajinan',
+            'tempat' => 'required',
+            'isi' => 'required',
+            'jadwal' => 'required',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:rejected,pending,approved',
             'views_count' => 'nullable|integer|min:0',
         ]);
 
-        $data = $request->all();
-
+        $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/events', $filename);
-            $data['thumbnail'] = 'events/' . $filename;
+            $thumbnailPath = $request->file('thumbnail')->store('event-thumbnails', 'public');
         }
 
-        Event::create($data);
+        Event::create([
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'kategori' => $request->kategori,
+            'tempat' => $request->tempat,
+            'jadwal' => $request->jadwal,
+            'thumbnail' => $thumbnailPath,
+            'akun_id' => $request->akun_id ?? Auth::id(),
+            'status' => $request->status,
+            'views_count' => $request->views_count ?? 0,
+        ]);
+
         return redirect()->route('admin.events.index')->with('success', 'Event berhasil dibuat.');
     }
 
@@ -196,39 +203,45 @@ public function update(Request $request, $id)
     public function updateAdmin(Request $request, Event $event)
     {
         $request->validate([
-            'akun_id' => 'required|exists:akun,id',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'judul' => 'required|string|max:255',
-            'jadwal' => 'required|date',
-            'tempat' => 'required|string|max:255',
-            'isi' => 'required|string',
+            'judul' => 'required|max:255',
             'kategori' => 'required|in:tarian,musik,kuliner,upacara,kerajinan',
+            'tempat' => 'required',
+            'isi' => 'required',
+            'jadwal' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:rejected,pending,approved',
             'views_count' => 'nullable|integer|min:0',
         ]);
 
-        $data = $request->all();
+        $data = [
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'kategori' => $request->kategori,
+            'tempat' => $request->tempat,
+            'jadwal' => $request->jadwal,
+            'status' => $request->status,
+            'views_count' => $request->views_count ?? $event->views_count,
+            'akun_id' => $request->akun_id ?? $event->akun_id,
+        ];
 
         if ($request->hasFile('thumbnail')) {
-            // Delete old thumbnail
+            // Delete old thumbnail if it exists
             if ($event->thumbnail) {
                 Storage::delete('public/' . $event->thumbnail);
             }
 
-            $file = $request->file('thumbnail');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/events', $filename);
-            $data['thumbnail'] = 'events/' . $filename;
+            $data['thumbnail'] = $request->file('thumbnail')->store('event-thumbnails', 'public');
         }
 
         $event->update($data);
+
         return redirect()->route('admin.events.index')->with('success', 'Event berhasil diperbarui.');
     }
 
     public function destroyAdmin(Event $event)
     {
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'Event berhasil dihapus.');
+        return redirect()->route('admin.events.index')->with('success', 'Event berhasil dihapus.');
     }
 
 }

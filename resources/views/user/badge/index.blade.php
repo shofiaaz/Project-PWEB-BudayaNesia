@@ -439,7 +439,7 @@
         @endif
     });
     </script>
-// Script yang diperbaiki untuk download PDF
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Awards Modal Elements

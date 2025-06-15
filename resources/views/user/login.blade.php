@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center px-4 py-8">
-    <div class="w-full max-w-screen-xl h-[80vh] bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="w-full max-w-screen-xl h-[100vh] bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="flex flex-col lg:flex-row h-full"> <div class="lg:w-1/2 login-bg hidden lg:block relative h-full"> <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-10">
                     <div class="text-center">
-                        <h2 class="text-xl font-bold text-white mb-4 animate-fade-in" style="font-family: 'Lily Script One', cursive;">BudayaNesia</h2>
+                        <h2 class="text-2xl font-bold text-white mb-4 animate-fade-in" style="font-family: 'Lily Script One', cursive;">BudayaNesia</h2>
                         <p class="text-white text-l animate-fade-in" style="animation-delay: 0.2s;">Eksplorasi seluruh kekayaan budaya indonesia</p>
                     </div>
                 </div>

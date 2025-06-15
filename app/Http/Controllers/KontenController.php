@@ -12,19 +12,24 @@ class KontenController extends Controller
 {
     public function index(Request $request)
     {
+        // filter
         $query = Konten::where('status', 'approved');
 
-        // Filter
+        $topContents = Konten::where('status', 'approved')
+            ->orderBy('views_count', 'desc')
+            ->take(1)
+            ->get();
+
+        // Apply filters
         if ($request->has('kategori') && $request->kategori != 'semua') {
             $query->where('kategori', $request->kategori);
         }
 
-        // Filter
         if ($request->has('asal') && $request->asal != 'semua') {
             $query->where('asal', $request->asal);
         }
 
-        // Search
+        // Apply search
         if ($request->has('search')) {
             $query->where(function($q) use ($request) {
                 $q->where('judul', 'like', '%'.$request->search.'%')
@@ -32,12 +37,16 @@ class KontenController extends Controller
             });
         }
 
-        $contents = $query->paginate(6);
-        $asalList = Konten::where('status', 'approved')->distinct()->pluck('asal');
+        $contents = $query->orderBy('created_at', 'desc')->paginate(6);
 
+        $asalList = Konten::where('status', 'approved')
+            ->distinct()
+            ->orderBy('asal')
+            ->pluck('asal');
 
-        return view('user.konten', compact('contents', 'asalList'));
+        return view('user.konten', compact('contents', 'asalList', 'topContents'));
     }
+
 
     public function histori()
     {
