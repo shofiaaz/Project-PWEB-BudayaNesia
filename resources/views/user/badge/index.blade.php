@@ -106,6 +106,11 @@
                                 <span class="text-gray-600">Badge Level:</span>
                                 <span class="font-bold text-budanes-darker">{{ $userBadge->status ?? 'Abdi' }}</span>
                             </div>
+                            <div class="mt-6 text-center">
+                            <button id="viewAwardsBtn" class="px-6 py-3 bg-budanes text-white font-bold rounded-lg hover:bg-budanes-dark transition-colors flex items-center mx-auto">
+                            <i class="fas fa-award mr-2"></i> Lihat Penghargaan
+                            </button>
+</div>
                         </div>
                     </div>
                 </div>
@@ -262,6 +267,52 @@
     </div>
 </div>
 
+<!-- Awards Modal - Letakkan di sini, sebelum closing body tag -->
+<div id="awardsModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full mx-4">
+        <div class="text-center">
+            <!-- Badge Icon -->
+            <div class="w-32 h-32 mx-auto bg-gradient-to-r {{ $badgeInfo['current']['color'] ?? 'from-gray-300 to-gray-400' }} rounded-full flex items-center justify-center text-white mb-6">
+                <i class="{{ $badgeInfo['current']['icon'] ?? 'fas fa-user' }} text-6xl"></i>
+            </div>
+
+            <h3 class="text-3xl font-bold text-gray-800 mb-2">Selamat!</h3>
+            <p class="text-xl text-budanes-darker font-medium mb-4"> {{$usersekarang->username}} telah mencapai</p>
+            <h4 class="text-2xl font-bold text-gray-800 mb-6">{{ $badgeInfo['current']['name'] ?? 'Abdi' }} Level</h4>
+
+            <!-- Achievement Stats -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="grid grid-cols-2 gap-4 text-left">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Poin</p>
+                        <p class="font-bold text-lg">{{ $userBadge->poin ?? 0 }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Konten Approved</p>
+                        <p class="font-bold text-lg">{{ $userBadge->konten_approved ?? 0 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-gray-600 mb-6">Terima kasih telah berkontribusi dalam melestarikan budaya Indonesia!</p>
+
+            <button id="closeAwardsModalBtn" class="px-6 py-2 bg-budanes text-white rounded-lg hover:bg-budanes-dark transition-colors mb-4">
+                Tutup
+            </button>
+
+            <!-- Download Buttons -->
+            <div class="mt-4 flex justify-center space-x-3">
+                <button id="downloadPngBtn" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center">
+                    <i class="fas fa-download mr-2"></i> PNG
+                </button>
+                <button id="downloadPdfBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i> PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
@@ -288,6 +339,10 @@
         }
     }
 </style>
+<!-- CDN Libraries - Tambahkan sebelum script lainnya -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const startQuizBtn = document.getElementById('start-quiz-btn');
@@ -384,4 +439,203 @@
         @endif
     });
     </script>
+// Script yang diperbaiki untuk download PDF
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Awards Modal Elements
+    const viewAwardsBtn = document.getElementById('viewAwardsBtn');
+    const awardsModal = document.getElementById('awardsModal');
+    const closeAwardsModalBtn = document.getElementById('closeAwardsModalBtn');
+    const downloadPngBtn = document.getElementById('downloadPngBtn');
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+
+    // Show Awards Modal
+    viewAwardsBtn.addEventListener('click', function() {
+        awardsModal.classList.remove('hidden');
+    });
+
+    // Close Awards Modal
+    closeAwardsModalBtn.addEventListener('click', function() {
+        awardsModal.classList.add('hidden');
+    });
+
+    // Close modal when clicking outside
+    awardsModal.addEventListener('click', function(event) {
+        if (event.target === awardsModal) {
+            awardsModal.classList.add('hidden');
+        }
+    });
+
+    // Download PNG Function
+    downloadPngBtn.addEventListener('click', function() {
+        const modalContent = awardsModal.querySelector('.bg-white');
+
+        // Hide download buttons temporarily
+        const downloadButtons = modalContent.querySelector('.mt-4.flex');
+        if (downloadButtons) {
+            downloadButtons.style.display = 'none';
+        }
+
+        html2canvas(modalContent, {
+            backgroundColor: '#ffffff',
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            width: modalContent.offsetWidth,
+            height: modalContent.offsetHeight - (downloadButtons ? 60 : 0)
+        }).then(canvas => {
+            // Show download buttons again
+            if (downloadButtons) {
+                downloadButtons.style.display = 'flex';
+            }
+
+            // Create download link
+            const link = document.createElement('a');
+            link.download = 'badge-penghargaan.png';
+            link.href = canvas.toDataURL();
+            link.click();
+
+            showToast('Badge berhasil didownload sebagai PNG!', 'success');
+        }).catch(error => {
+            if (downloadButtons) {
+                downloadButtons.style.display = 'flex';
+            }
+            console.error('Error generating PNG:', error);
+            showToast('Gagal mendownload PNG. Silakan coba lagi.', 'error');
+        });
+    });
+
+    // Download PDF Function - DIPERBAIKI
+    downloadPdfBtn.addEventListener('click', function() {
+        const modalContent = awardsModal.querySelector('.bg-white');
+
+        // Hide download buttons temporarily
+        const downloadButtons = modalContent.querySelector('.mt-4.flex');
+        if (downloadButtons) {
+            downloadButtons.style.display = 'none';
+        }
+
+        html2canvas(modalContent, {
+            backgroundColor: '#ffffff',
+            scale: 3, // Tingkatkan scale untuk kualitas lebih baik
+            useCORS: true,
+            allowTaint: true,
+            width: modalContent.offsetWidth,
+            height: modalContent.offsetHeight - (downloadButtons ? 60 : 0)
+        }).then(canvas => {
+            // Show download buttons again
+            if (downloadButtons) {
+                downloadButtons.style.display = 'flex';
+            }
+
+            const { jsPDF } = window.jspdf;
+
+            // Hitung dimensi berdasarkan canvas
+            const canvasWidth = canvas.width;
+            const canvasHeight = canvas.height;
+
+            // Tentukan orientasi berdasarkan rasio
+            const isLandscape = canvasWidth > canvasHeight;
+            const orientation = isLandscape ? 'landscape' : 'portrait';
+
+            const pdf = new jsPDF({
+                orientation: orientation,
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            // Dapatkan dimensi halaman PDF
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            // Hitung dimensi gambar dengan margin
+            const margin = 10;
+            const maxWidth = pageWidth - (margin * 2);
+            const maxHeight = pageHeight - (margin * 4); // Extra margin untuk header/footer
+
+            // Hitung rasio untuk fit ke halaman
+            const widthRatio = maxWidth / (canvasWidth / 72 * 25.4); // Convert px to mm
+            const heightRatio = maxHeight / (canvasHeight / 72 * 25.4);
+            const ratio = Math.min(widthRatio, heightRatio, 1); // Tidak lebih dari 100%
+
+            const imgWidth = (canvasWidth / 72 * 25.4) * ratio;
+            const imgHeight = (canvasHeight / 72 * 25.4) * ratio;
+
+            // Posisi tengah
+            const x = (pageWidth - imgWidth) / 2;
+            const y = margin + 10; // Tambah space untuk header
+
+            // Tambah header
+            pdf.setFontSize(16);
+            pdf.setTextColor(164, 19, 19); // budanes color
+            pdf.text('Sertifikat Badge Penghargaan', pageWidth / 2, margin + 5, { align: 'center' });
+
+            // Tambah gambar
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, imgWidth, imgHeight);
+
+            // Tambah footer
+            const footerY = y + imgHeight + 10;
+            if (footerY < pageHeight - 15) { // Pastikan footer muat
+                pdf.setFontSize(10);
+                pdf.setTextColor(100, 100, 100);
+                pdf.text('Dicetak pada: ' + new Date().toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                }), pageWidth / 2, footerY, { align: 'center' });
+
+                pdf.text('Sistem Badge Level - Budaya Indonesia', pageWidth / 2, footerY + 5, { align: 'center' });
+            }
+
+            // Save PDF dengan nama yang unik
+            const timestamp = new Date().toISOString().slice(0, 10);
+            pdf.save(`badge-penghargaan-${timestamp}.pdf`);
+
+            showToast('Badge berhasil didownload sebagai PDF!', 'success');
+        }).catch(error => {
+            if (downloadButtons) {
+                downloadButtons.style.display = 'flex';
+            }
+            console.error('Error generating PDF:', error);
+            showToast('Gagal mendownload PDF. Silakan coba lagi.', 'error');
+        });
+    });
+
+    // Toast notification function
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full`;
+
+        if (type === 'success') {
+            toast.classList.add('bg-green-500', 'text-white');
+        } else {
+            toast.classList.add('bg-red-500', 'text-white');
+        }
+
+        toast.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} mr-2"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        document.body.appendChild(toast);
+
+        // Animate in
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full');
+        }, 100);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('translate-x-full');
+            setTimeout(() => {
+                if (document.body.contains(toast)) {
+                    document.body.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+});
+</script>
 @endsection

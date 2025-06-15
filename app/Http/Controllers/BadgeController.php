@@ -41,10 +41,11 @@ class BadgeController extends Controller
             ->get();
 
         $userBadge = $badgeLevel;
+        $usersekarang = Auth::user();
 
         $badgeInfo = $this->getBadgeInfo($userBadge ? $userBadge->poin : 0);
 
-        return view('user.badge.index', compact('topUsers', 'topContents', 'userBadge', 'badgeInfo', 'quizCompleted', 'quizScore'));
+        return view('user.badge.index', compact('topUsers', 'topContents', 'userBadge', 'badgeInfo', 'quizCompleted', 'quizScore', 'usersekarang'));
     }
 
     public function quiz()
